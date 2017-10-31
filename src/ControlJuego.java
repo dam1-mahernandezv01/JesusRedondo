@@ -47,9 +47,9 @@ public class ControlJuego {
 	 * @param j: posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
-	private int calculoMinasAdjuntas(int i, int j){
-
-	}
+//	private int calculoMinasAdjuntas(int i, int j){
+//
+//	}
 	
 	/**
 	 * Método que nos permite 
@@ -58,9 +58,9 @@ public class ControlJuego {
 	 * @param j: posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	public boolean abrirCasilla(int i, int j){
-
-	}
+//	public boolean abrirCasilla(int i, int j){
+//
+//	}
 	
 	
 	
@@ -68,8 +68,8 @@ public class ControlJuego {
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas las casillas.
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
 	 **/
-	public boolean esFinJuego(){
-	}
+//	public boolean esFinJuego(){
+//	}
 	
 	
 	/**
@@ -93,14 +93,14 @@ public class ControlJuego {
 	 * @param j : posición horizontal de la cela.
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
-	public int getMinasAlrededor(int i, int j) {
-	}
+//	public int getMinasAlrededor(int i, int j) {
+//	}
 
 	/**
 	 * Método que devuelve la puntuación actual
 	 * @return Un entero con la puntuación actual
 	 */
-	public int getPuntuacion() {
-	}
+//	public int getPuntuacion() {
+//	}
 	
 }
