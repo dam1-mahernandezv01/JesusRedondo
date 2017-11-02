@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.naming.ldap.Rdn;
+
 /**
  * Clase gestora del tablero de juego.
  * Guarda una matriz de enteros representado el tablero.
@@ -35,8 +37,22 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
-
+		int ejeX, ejeY;
+		tablero = new int[LADO_TABLERO][LADO_TABLERO];
+		Random random = new Random();
 		
+		for (int minaGenerada = 0; minaGenerada < MINAS_INICIALES; minaGenerada++) {
+			ejeX = random.nextInt(LADO_TABLERO);
+			ejeY = random.nextInt(LADO_TABLERO);
+			
+			if (tablero [ejeX][ejeY] != -1) {
+				tablero[ejeX][ejeY] = -1;
+			} else {
+				minaGenerada--;
+			}
+		}
+		
+		depurarTablero();
 	}
 	
 	/**Cálculo de las minas adjuntas:
@@ -69,6 +85,7 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
 	 **/
 //	public boolean esFinJuego(){
+//
 //	}
 	
 	
@@ -94,6 +111,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 //	public int getMinasAlrededor(int i, int j) {
+//
 //	}
 
 	/**
@@ -101,6 +119,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 //	public int getPuntuacion() {
+//	
 //	}
 	
 }
