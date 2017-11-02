@@ -1,125 +1,137 @@
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.naming.ldap.Rdn;
 
 /**
- * Clase gestora del tablero de juego.
- * Guarda una matriz de enteros representado el tablero.
- * Si hay una mina en una posici贸n guarda el n煤mero -1
- * Si no hay una mina, se guarda cu谩ntas minas hay alrededor.
- * Almacena la puntuaci贸n de la partida
+ * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
+ * el tablero. Si hay una mina en una posici贸n guarda el n煤mero -1 Si no hay
+ * una mina, se guarda cu谩ntas minas hay alrededor. Almacena la puntuaci贸n de
+ * la partida
+ * 
  * @author jesusredondogarcia
- *
+ * @author Marco Antonio Hern醤dez Valiente
  */
 public class ControlJuego {
-	
+
 	private final static int MINA = -1;
 	final int MINAS_INICIALES = 20;
 	final int LADO_TABLERO = 10;
 
-	private int [][] tablero;
+	private int[][] tablero;
 	private int puntuacion;
-	
-	
+
 	public ControlJuego() {
-		//Creamos el tablero:
+		// Creamos el tablero:
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
-		
-		//Inicializamos una nueva partida
+
+		// Inicializamos una nueva partida
 		inicializarPartida();
 	}
-	
-	
-	/**M茅todo para generar un nuevo tablero de partida:
-	 * @pre: La estructura tablero debe existir. 
-	 * @post: Al final el tablero se habr谩 inicializado con tantas minas como marque la variable MINAS_INICIALES. 
-	 * 			El resto de posiciones que no son minas guardan en el entero cu谩ntas minas hay alrededor de la celda
+
+	/**
+	 * M閠odo para generar un nuevo tablero de partida:
+	 * 
+	 * @pre: La estructura tablero debe existir.
+	 * @post: Al final el tablero se habr帷 inicializado con tantas minas como
+	 *        marque la variable MINAS_INICIALES. El resto de posiciones que no son
+	 *        minas guardan en el entero cu醤tas minas hay alrededor de la celda
 	 */
-	public void inicializarPartida(){
+	public void inicializarPartida() {
 		int ejeX, ejeY;
-		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		Random random = new Random();
-		
-		for (int minaGenerada = 0; minaGenerada < MINAS_INICIALES; minaGenerada++) {
+
+		for (int minaGenerada = 1; minaGenerada <= MINAS_INICIALES; minaGenerada++) {
 			ejeX = random.nextInt(LADO_TABLERO);
 			ejeY = random.nextInt(LADO_TABLERO);
-			
-			if (tablero [ejeX][ejeY] != -1) {
+
+			if (tablero[ejeX][ejeY] != -1) {
 				tablero[ejeX][ejeY] = -1;
 			} else {
 				minaGenerada--;
 			}
 		}
-		
+
 		depurarTablero();
 	}
-	
-	/**C谩lculo de las minas adjuntas:
-	 * Para calcular el n煤mero de minas tenemos que tener en cuenta que no nos salimos nunca del tablero.
-	 * Por lo tanto, como mucho la i y la j valdr谩n LADO_TABLERO-1.
-	 * Por lo tanto, como mucho la i y la j valdr谩n como poco 0.
-	 * @param i: posici贸n verticalmente de la casilla a rellenar
-	 * @param j: posici贸n horizontalmente de la casilla a rellenar
-	 * @return : El n煤mero de minas que hay alrededor de la casilla [i][j]
-	 **/
-//	private int calculoMinasAdjuntas(int i, int j){
-//
-//	}
-	
+
 	/**
-	 * M茅todo que nos permite 
-	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el GestorJuego. Por lo tanto siempre sumaremos puntos
-	 * @param i: posici贸n verticalmente de la casilla a abrir
-	 * @param j: posici贸n horizontalmente de la casilla a abrir
+	 * C醠culo de las minas adjuntas: Para calcular el n鷐ero de minas tenemos que
+	 * tener en cuenta que no nos salimos nunca del tablero. Por lo tanto, como
+	 * mucho la i y la j valdr醤 LADO_TABLERO-1. Por lo tanto, como mucho la i y la
+	 * j valdr醤 como poco 0.
+	 * 
+	 * @param i:
+	 *            posici髇 verticalmente de la casilla a rellenar
+	 * @param j:
+	 *            posici髇 horizontalmente de la casilla a rellenar
+	 * @return : El n鷐ero de minas que hay alrededor de la casilla [i][j]
+	 **/
+	// private int calculoMinasAdjuntas(int i, int j){
+	//
+	// }
+
+	/**
+	 * M閠odo que nos permite
+	 * 
+	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por
+	 *      el GestorJuego. Por lo tanto siempre sumaremos puntos
+	 * @param i:
+	 *            posici髇 verticalmente de la casilla a abrir
+	 * @param j:
+	 *            posici髇 horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-//	public boolean abrirCasilla(int i, int j){
-//
-//	}
-	
-	
-	
+	// public boolean abrirCasilla(int i, int j){
+	//
+	// }
+
 	/**
-	 * M茅todo que checkea si se ha terminado el juego porque se han abierto todas las casillas.
-	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
+	 * M閠odo que checkea si se ha terminado el juego porque se han abierto todas
+	 * las casillas.
+	 * 
+	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
+	 *         minas.
 	 **/
-//	public boolean esFinJuego(){
-//
-//	}
-	
-	
+	// public boolean esFinJuego(){
+	//
+	// }
+
 	/**
-	 * M茅todo que pinta por pantalla toda la informaci贸n del tablero, se utiliza para depurar
+	 * M閠odo que pinta por pantalla toda la informaci髇 del tablero, se utiliza
+	 * para depurar
 	 */
-	public void depurarTablero(){
+	public void depurarTablero() {
 		System.out.println("---------TABLERO--------------");
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
-				System.out.print(tablero[i][j]+"\t");
+				System.out.print(tablero[i][j] + "\t");
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuaci贸n: "+puntuacion);
+		System.out.println("\nPuntuaci髇: " + puntuacion);
 	}
 
 	/**
-	 * M茅todo que se utiliza para obtener las minas que hay alrededor de una celda
-	 * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta calcularlo, s铆mplemente consultarlo
-	 * @param i : posici贸n vertical de la celda.
-	 * @param j : posici贸n horizontal de la cela.
-	 * @return Un entero que representa el n煤mero de minas alrededor de la celda
+	 * M閠odo que se utiliza para obtener las minas que hay alrededor de una celda
+	 * 
+	 * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta
+	 *      calcularlo, s韒plemente consultarlo
+	 * @param i
+	 *            : posici髇 vertical de la celda.
+	 * @param j
+	 *            : posici髇 horizontal de la cela.
+	 * @return Un entero que representa el n鷐ero de minas alrededor de la celda
 	 */
-//	public int getMinasAlrededor(int i, int j) {
-//
-//	}
+	// public int getMinasAlrededor(int i, int j) {
+	//
+	// }
 
 	/**
-	 * M茅todo que devuelve la puntuaci贸n actual
-	 * @return Un entero con la puntuaci贸n actual
+	 * M閠odo que devuelve la puntuaci髇 actual
+	 * 
+	 * @return Un entero con la puntuaci髇 actual
 	 */
-//	public int getPuntuacion() {
-//	
-//	}
-	
+	// public int getPuntuacion() {
+	//
+	// }
 }

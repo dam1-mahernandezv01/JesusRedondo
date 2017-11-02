@@ -8,7 +8,7 @@ import java.awt.EventQueue;
 public class Principal {
 
 	/**
-	 * Método main
+	 * M�todo main
 	 * @param args : Cadenas de parámetros del main
 	 */
 	public static void main(String[] args) {
@@ -17,11 +17,11 @@ public class Principal {
 				try {
 					VentanaPrincipal ventana = new VentanaPrincipal();
 					ventana.inicializar();
+					ControlJuego juego = new ControlJuego();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
 }
