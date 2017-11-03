@@ -35,6 +35,7 @@ public class VentanaPrincipal {
 
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
+	VentanaPrincipal ventanaPrincipal = this;
 
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -148,7 +149,7 @@ public class VentanaPrincipal {
 	 * - 1 : cyan 
 	 * - 2 : verde 
 	 * - 3 : naranja 
-	 * - 4 Ó más : rojo
+	 * - 4 ó más : rojo
 	 * 
 	 * @param i:
 	 *            posición vertical de la celda.

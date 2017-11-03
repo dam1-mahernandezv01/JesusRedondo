@@ -12,7 +12,6 @@ import javax.naming.ldap.Rdn;
  * @author Marco Antonio Hernández Valiente
  */
 public class ControlJuego {
-
 	private final static int MINA = -1;
 	final int MINAS_INICIALES = 20;
 	final int LADO_TABLERO = 10;
@@ -44,10 +43,20 @@ public class ControlJuego {
 			ejeX = random.nextInt(LADO_TABLERO);
 			ejeY = random.nextInt(LADO_TABLERO);
 
-			if (tablero[ejeX][ejeY] != -1) {
-				tablero[ejeX][ejeY] = -1;
+			if (tablero[ejeX][ejeY] != MINA) {
+				tablero[ejeX][ejeY] = MINA;
 			} else {
 				minaGenerada--;
+			}
+		}
+
+		depurarTablero();
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				if (tablero[i][j] == MINA) {
+					calculoMinasAdjuntas(i, j);
+				}
 			}
 		}
 
@@ -66,9 +75,141 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
-	// private int calculoMinasAdjuntas(int i, int j){
-	//
-	// }
+	private int calculoMinasAdjuntas(int i, int j) {
+		int ejeX = i, ejeY = j;
+
+		if (ejeX == 0 && ejeY == 0) {
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY + 1] != MINA) {
+				tablero[ejeX + 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+		} else if (ejeX == 9 && ejeY == 0) {
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY + 1] != MINA) {
+				tablero[ejeX - 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+		} else if (ejeX == 9 && ejeY == 9) {
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY - 1] != MINA) {
+				tablero[ejeX - 1][ejeY - 1] += 1;
+			}
+		} else if (ejeX == 0 && ejeY == 9) {
+			if (tablero[ejeX][ejeY - 1] != MINA) {
+				tablero[ejeX][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY - 1] != MINA) {
+				tablero[ejeX + 1][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+		} else if (ejeY == 0 && ejeX > 0 && ejeX < 9) {
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY + 1] != MINA) {
+				tablero[ejeX + 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY + 1] != MINA) {
+				tablero[ejeX - 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+		} else if (ejeX == 9 && ejeY > 0 && ejeY < 9) {
+			if (tablero[ejeX][ejeY - 1] != MINA) {
+				tablero[ejeX][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY + 1] != MINA) {
+				tablero[ejeX - 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY - 1] != MINA) {
+				tablero[ejeX - 1][ejeY - 1] += 1;
+			}
+		} else if (ejeY == 9 && ejeX > 0 && ejeX < 9) {
+			if (tablero[ejeX][ejeY - 1] != MINA) {
+				tablero[ejeX][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY - 1] != MINA) {
+				tablero[ejeX + 1][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY - 1] != MINA) {
+				tablero[ejeX - 1][ejeY - 1] += 1;
+			}
+		} else if (ejeX == 0 && ejeY > 0 && ejeY < 9) {
+			if (tablero[ejeX][ejeY - 1] != MINA) {
+				tablero[ejeX][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY - 1] != MINA) {
+				tablero[ejeX + 1][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY + 1] != MINA) {
+				tablero[ejeX + 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+		} else {
+			if (tablero[ejeX][ejeY - 1] != MINA) {
+				tablero[ejeX][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY - 1] != MINA) {
+				tablero[ejeX + 1][ejeY - 1] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY] != MINA) {
+				tablero[ejeX + 1][ejeY] += 1;
+			}
+			if (tablero[ejeX + 1][ejeY + 1] != MINA) {
+				tablero[ejeX + 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX][ejeY + 1] != MINA) {
+				tablero[ejeX][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY + 1] != MINA) {
+				tablero[ejeX - 1][ejeY + 1] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY] != MINA) {
+				tablero[ejeX - 1][ejeY] += 1;
+			}
+			if (tablero[ejeX - 1][ejeY - 1] != MINA) {
+				tablero[ejeX - 1][ejeY - 1] += 1;
+			}
+		}
+		return tablero[ejeX][ejeY];
+	}
 
 	/**
 	 * Método que nos permite
@@ -81,9 +222,14 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	// public boolean abrirCasilla(int i, int j){
-	//
-	// }
+	public boolean abrirCasilla(int i, int j) {
+		if (tablero[i][j] != MINA) {
+			puntuacion++;
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas
@@ -92,9 +238,13 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
-	// public boolean esFinJuego(){
-	//
-	// }
+	public boolean esFinJuego() {
+		if (puntuacion == LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza
@@ -122,16 +272,16 @@ public class ControlJuego {
 	 *            : posición horizontal de la cela.
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
-	// public int getMinasAlrededor(int i, int j) {
-	//
-	// }
+	public int getMinasAlrededor(int i, int j) {
+		return tablero[i][j];
+	}
 
 	/**
 	 * Método que devuelve la puntuación actual
 	 * 
 	 * @return Un entero con la puntuación actual
 	 */
-	// public int getPuntuacion() {
-	//
-	// }
+	public int getPuntuacion() {
+		return puntuacion;
+	}
 }

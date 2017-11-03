@@ -17,7 +17,6 @@ public class Principal {
 				try {
 					VentanaPrincipal ventana = new VentanaPrincipal();
 					ventana.inicializar();
-					ControlJuego juego = new ControlJuego();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
