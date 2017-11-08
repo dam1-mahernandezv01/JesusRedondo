@@ -3,12 +3,13 @@ import java.awt.event.ActionListener;
 
 /**
  * Clase que implementa el listener de los botones del Buscaminas. De alguna
- * manera tendr√° que poder acceder a la ventana principal. Se puede lograr
+ * manera tendr· que poder acceder a la ventana principal. Se puede lograr
  * pasando en el constructor la referencia a la ventana. Recuerda que desde la
  * ventana, se puede acceder a la variable de tipo ControlJuego
  * 
  * @author jesusredondogarcia
- **
+ * @author Marco Antnio Hern·ndez Valiente
+ *
  */
 public class ActionBoton implements ActionListener {
 

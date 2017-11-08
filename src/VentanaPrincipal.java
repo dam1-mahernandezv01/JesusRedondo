@@ -13,6 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author Marco Antnio Hernández Valiente
+ *
+ */
 public class VentanaPrincipal {
 	// La ventana principal, en este caso, guarda todos los componentes:
 	JFrame ventana;
