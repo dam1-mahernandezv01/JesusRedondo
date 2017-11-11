@@ -15,8 +15,7 @@ import javax.swing.SwingConstants;
 
 /**
  * 
- * @author Marco Antnio Hernández Valiente
- *
+ * @author Marco Antonio Hernández Valiente
  */
 public class VentanaPrincipal {
 	// La ventana principal, en este caso, guarda todos los componentes:

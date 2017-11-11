@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
  * 
  * @author jesusredondogarcia
  * @author Marco Antnio Hernández Valiente
- *
  */
 public class ActionBoton implements ActionListener {
 
