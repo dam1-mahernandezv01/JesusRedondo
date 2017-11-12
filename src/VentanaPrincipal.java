@@ -51,7 +51,6 @@ public class VentanaPrincipal {
 
 	// Inicializa todos los componentes del frame
 	public void inicializarComponentes() {
-
 		// Definimos el layout:
 		ventana.setLayout(new GridBagLayout());
 
@@ -132,7 +131,6 @@ public class VentanaPrincipal {
 		// BotónEmpezar:
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
-
 	}
 
 	/**
@@ -140,7 +138,29 @@ public class VentanaPrincipal {
 	 * programa
 	 */
 	public void inicializarListeners() {
-		// TODO
+		ActionBoton actionBoton;
+
+		botonEmpezar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventana.remove(panelJuego);
+				ventana.remove(panelEmpezar);
+				ventana.remove(panelImagen);
+				ventana.remove(panelPuntuacion);
+				
+				juego = new ControlJuego();					
+				
+				inicializar();
+				refrescarPantalla();
+			}
+		});
+		
+		for (int ejeX = 0; ejeX < botonesJuego.length; ejeX++) {
+			for (int ejeY = 0; ejeY < panelesJuego[ejeX].length; ejeY++) {
+				actionBoton = new ActionBoton(ventanaPrincipal, ejeX, ejeY);
+				botonesJuego[ejeX][ejeY].addActionListener(actionBoton);
+			}
+		}
 	}
 
 	/**
@@ -148,12 +168,8 @@ public class VentanaPrincipal {
 	 * celda Saca el botón que haya en la celda determinada y añade un JLabel
 	 * centrado y no editable con el número de minas alrededor. Se pinta el color
 	 * del texto según la siguiente correspondecia (consultar la variable
-	 * correspondeciaColor): 
-	 * - 0 : negro 
-	 * - 1 : cyan 
-	 * - 2 : verde 
-	 * - 3 : naranja 
-	 * - 4 ó más : rojo
+	 * correspondeciaColor): - 0 : negro - 1 : cyan - 2 : verde - 3 : naranja - 4 ó
+	 * más : rojo
 	 * 
 	 * @param i:
 	 *            posición vertical de la celda.
@@ -161,7 +177,22 @@ public class VentanaPrincipal {
 	 *            posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i, int j) {
-		// TODO
+		int ejeX = i, ejeY = j;
+		Color numeroColor;
+		JLabel textoMinas;
+
+		textoMinas = new JLabel(juego.getMinasAlrededor(ejeX, ejeY) + "");
+		textoMinas.setHorizontalAlignment(SwingConstants.CENTER);	
+		
+		if (juego.getMinasAlrededor(ejeX, ejeY) > -1) {
+			numeroColor = correspondenciaColores[juego.getMinasAlrededor(ejeX, ejeY)];
+			textoMinas.setForeground(numeroColor);		
+		}
+
+		panelesJuego[ejeX][ejeY].remove(botonesJuego[ejeX][ejeY]);
+		panelesJuego[ejeX][ejeY].add(textoMinas);
+		
+		refrescarPantalla();
 	}
 
 	/**
@@ -173,15 +204,28 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el
 	 *       juego.
 	 */
-	public void mostrarFinJuego(boolean porExplosion) {
-		// TODO
+	public void mostrarFinJuego(boolean porExplosion) {		
+		if (porExplosion) {
+			JOptionPane.showMessageDialog(ventana, "Sigue intentándolo", "DERROTA", 0);
+			
+			
+		} else {
+			JOptionPane.showMessageDialog(ventana, "Así se hace, has ganado", "VICTORIA", 1);
+		}
+		
+		for (int ejeX = 0; ejeX < botonesJuego.length; ejeX++) {
+			for (int ejeY = 0; ejeY < botonesJuego[ejeX].length; ejeY++) {
+				mostrarNumMinasAlrededor(ejeX, ejeY);
+				botonesJuego[ejeX][ejeY].setEnabled(false);
+			}
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		// TODO
+		pantallaPuntuacion.setText(juego.getPuntuacion() + "");
 	}
 
 	/**

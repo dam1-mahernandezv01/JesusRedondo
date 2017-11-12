@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Random;
-import javax.naming.ldap.Rdn;
 
 /**
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
@@ -36,31 +34,29 @@ public class ControlJuego {
 	 *        minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida() {
-		int ejeX, ejeY;
+		int x, y;
 		Random random = new Random();
 
 		for (int minaGenerada = 1; minaGenerada <= MINAS_INICIALES; minaGenerada++) {
-			ejeX = random.nextInt(LADO_TABLERO);
-			ejeY = random.nextInt(LADO_TABLERO);
+			x = random.nextInt(LADO_TABLERO);
+			y = random.nextInt(LADO_TABLERO);
 
-			if (tablero[ejeX][ejeY] != MINA) {
-				tablero[ejeX][ejeY] = MINA;
+			if (tablero[x][y] != MINA) {
+				tablero[x][y] = MINA;
 			} else {
 				minaGenerada--;
 			}
 		}
 
-		depurarTablero();
-
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero[i].length; j++) {
-				if (tablero[i][j] == MINA) {
-					calculoMinasAdjuntas(i, j);
+		for (int ejeX = 0; ejeX < tablero.length; ejeX++) {
+			for (int ejeY = 0; ejeY < tablero[ejeX].length; ejeY++) {
+				if (tablero[ejeX][ejeY] == MINA) {
+					calculoMinasAdjuntas(ejeX, ejeY);
 				}
 			}
 		}
 
-		depurarTablero();
+		// depurarTablero();
 	}
 
 	/**
@@ -223,7 +219,9 @@ public class ControlJuego {
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j) {
-		if (tablero[i][j] != MINA) {
+		int ejeX = i, ejeY = j;
+		
+		if (tablero[ejeX][ejeY] != MINA) {
 			puntuacion++;
 			return true;
 		} else {
@@ -239,7 +237,7 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		if (puntuacion == LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) {
+		if (puntuacion == Math.pow(LADO_TABLERO, 2) - MINAS_INICIALES) {
 			return true;
 		} else {
 			return false;
@@ -273,7 +271,8 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		return tablero[i][j];
+		int ejeX = i, ejeY = j;
+		return tablero[ejeX][ejeY];
 	}
 
 	/**
